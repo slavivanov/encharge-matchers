@@ -1,5 +1,5 @@
 import * as _ from "lodash";
-import { checkEventProperties } from "../src/encharge-matchers";
+import { eventPassesFilters } from "../src/encharge-matchers";
 
 describe("/event", () => {
   it("validate when no filters", async () => {
@@ -8,7 +8,7 @@ describe("/event", () => {
       prop2: 123
     };
     const filters = undefined as any;
-    expect(checkEventProperties({ eventProperties: event, filters })).toEqual(true);
+    expect(eventPassesFilters({ event, filters })).toEqual(true);
   });
 
   it("validate when filter succeeds", async () => {
@@ -17,8 +17,8 @@ describe("/event", () => {
       prop2: 123
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -36,8 +36,8 @@ describe("/event", () => {
       prop2: 123
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -54,8 +54,8 @@ describe("/event", () => {
       prop1: "tada"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -72,8 +72,8 @@ describe("/event", () => {
       prop1: true
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -90,8 +90,8 @@ describe("/event", () => {
       prop1: true
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -108,8 +108,8 @@ describe("/event", () => {
       prop1: false
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -126,8 +126,8 @@ describe("/event", () => {
       prop1: 123
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -144,8 +144,8 @@ describe("/event", () => {
       prop1: 123.1
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -162,8 +162,8 @@ describe("/event", () => {
       prop1: undefined
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -180,8 +180,8 @@ describe("/event", () => {
       prop1: null
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -198,8 +198,8 @@ describe("/event", () => {
       prop1: null
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -216,8 +216,8 @@ describe("/event", () => {
       prop1: undefined
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -234,8 +234,8 @@ describe("/event", () => {
       prop1: 123
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -252,8 +252,8 @@ describe("/event", () => {
       prop1: true
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -270,8 +270,8 @@ describe("/event", () => {
       prop1: false
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -288,8 +288,8 @@ describe("/event", () => {
       prop1: "222"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -306,8 +306,8 @@ describe("/event", () => {
       prop1: "222"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -324,8 +324,8 @@ describe("/event", () => {
       prop1: 111
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -342,8 +342,8 @@ describe("/event", () => {
       prop1: 333
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -360,8 +360,8 @@ describe("/event", () => {
       prop1: 333
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -378,8 +378,8 @@ describe("/event", () => {
       prop1: 111
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -396,8 +396,8 @@ describe("/event", () => {
       prop1: undefined
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -414,8 +414,8 @@ describe("/event", () => {
       prop1: null
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -432,8 +432,8 @@ describe("/event", () => {
       prop1: ""
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -450,8 +450,8 @@ describe("/event", () => {
       prop1: undefined
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -468,8 +468,8 @@ describe("/event", () => {
       prop1: null
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -486,8 +486,8 @@ describe("/event", () => {
       prop1: ""
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -504,8 +504,8 @@ describe("/event", () => {
       prop1: "123"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -522,8 +522,8 @@ describe("/event", () => {
       prop1: "Some text here"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -540,8 +540,8 @@ describe("/event", () => {
       prop1: "Some text here"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -557,8 +557,8 @@ describe("/event", () => {
       prop1: "Some text here"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -574,8 +574,8 @@ describe("/event", () => {
       prop1: "Val"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -591,8 +591,8 @@ describe("/event", () => {
       prop1: "Hello"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -608,8 +608,8 @@ describe("/event", () => {
       prop1: ""
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -625,8 +625,8 @@ describe("/event", () => {
       prop1: "Val"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -642,8 +642,8 @@ describe("/event", () => {
       prop1: "Hello"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -659,8 +659,8 @@ describe("/event", () => {
       prop1: ""
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -676,8 +676,8 @@ describe("/event", () => {
       prop1: "Val"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -693,8 +693,8 @@ describe("/event", () => {
       prop1: "Hello"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -710,8 +710,8 @@ describe("/event", () => {
       prop1: ""
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -727,8 +727,8 @@ describe("/event", () => {
       prop1: "Val"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -744,8 +744,8 @@ describe("/event", () => {
       prop1: "Hello"
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
@@ -761,8 +761,8 @@ describe("/event", () => {
       prop1: ""
     };
     expect(
-      checkEventProperties({
-        eventProperties: event,
+      eventPassesFilters({
+        event,
         filters: [
           {
             propertyName: "prop1",
