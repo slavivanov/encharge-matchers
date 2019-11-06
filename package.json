@@ -1,6 +1,6 @@
 {
   "name": "encharge-matchers",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "description": "",
   "keywords": [],
   "main": "dist/encharge-matchers.umd.js",
@@ -12,7 +12,7 @@
   "author": "Slav Ivanov <slav@encharge.io>",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/slavivanov/encharge-matchers"
   },
   "license": "MIT",
   "engines": {
