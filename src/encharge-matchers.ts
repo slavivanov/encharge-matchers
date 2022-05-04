@@ -29,9 +29,9 @@ export const eventPassesFilters = ({
 }) => {
   let propertiesSatisfyFilters = true;
   _.each(filters, filter => {
+    const property = _.get(event, filter.propertyName);
     switch (filter.condition) {
       case "is": {
-        const property = event[filter.propertyName];
         // null and undefined are considered not equal to anything
         if (_.isNil(property)) {
           propertiesSatisfyFilters = false;
@@ -44,7 +44,6 @@ export const eventPassesFilters = ({
       }
 
       case "is not": {
-        const property = event[filter.propertyName];
         // null and undefined are considered not equal to anything
         if (!_.isNil(property)) {
           // cast the filter value to the type of the segment property
@@ -56,7 +55,6 @@ export const eventPassesFilters = ({
       }
 
       case "contains": {
-        const property = event[filter.propertyName];
         // null and undefined are considered not equal to anything
         if (_.isNil(property)) {
           propertiesSatisfyFilters = false;
@@ -69,7 +67,6 @@ export const eventPassesFilters = ({
       }
 
       case "does not contain": {
-        const property = event[filter.propertyName];
         // null and undefined are considered not equal to anything
         if (_.isNil(property)) {
           propertiesSatisfyFilters = false;
@@ -82,7 +79,6 @@ export const eventPassesFilters = ({
       }
 
       case "starts with": {
-        const property = event[filter.propertyName];
         // null and undefined are considered not equal to anything
         if (_.isNil(property)) {
           propertiesSatisfyFilters = false;
@@ -94,7 +90,6 @@ export const eventPassesFilters = ({
         break;
       }
       case "does not start with": {
-        const property = event[filter.propertyName];
         // null and undefined are considered not equal to anything
         if (_.isNil(property)) {
           propertiesSatisfyFilters = false;
@@ -106,7 +101,6 @@ export const eventPassesFilters = ({
         break;
       }
       case "ends with": {
-        const property = event[filter.propertyName];
         // null and undefined are considered not equal to anything
         if (_.isNil(property)) {
           propertiesSatisfyFilters = false;
@@ -118,7 +112,6 @@ export const eventPassesFilters = ({
         break;
       }
       case "does not end with": {
-        const property = event[filter.propertyName];
         // null and undefined are considered not equal to anything
         if (_.isNil(property)) {
           propertiesSatisfyFilters = false;
@@ -131,7 +124,6 @@ export const eventPassesFilters = ({
       }
 
       case "is more than": {
-        const property = event[filter.propertyName];
         // null and undefined are considered not equal to anything
         if (_.isNil(property)) {
           propertiesSatisfyFilters = false;
@@ -144,7 +136,6 @@ export const eventPassesFilters = ({
       }
 
       case "is less than": {
-        const property = event[filter.propertyName];
         // null and undefined are considered not equal to anything
         if (_.isNil(property)) {
           propertiesSatisfyFilters = false;
@@ -157,7 +148,6 @@ export const eventPassesFilters = ({
       }
 
       case "is empty": {
-        const property = event[filter.propertyName];
         // null and undefined are considered empty
         if (property !== "" && !_.isNil(property)) {
           propertiesSatisfyFilters = false;
@@ -165,7 +155,6 @@ export const eventPassesFilters = ({
         break;
       }
       case "is not empty": {
-        const property = event[filter.propertyName];
         // null and undefined are considered not equal to anything
         if (property === "" || _.isNil(property)) {
           propertiesSatisfyFilters = false;

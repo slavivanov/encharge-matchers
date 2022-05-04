@@ -773,4 +773,37 @@ describe("/event", () => {
       })
     ).toEqual(true);
   });
+
+  it("should work with nested property name", async () => {
+    const event = {
+      nested: {
+        prop1: "hm"
+      },
+      prop2: 123
+    };
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "nested.prop1",
+            condition: "is",
+            propertyValue: "hm"
+          }
+        ]
+      })
+    ).toEqual(true);
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "prop1",
+            condition: "is",
+            propertyValue: "hm"
+          }
+        ]
+      })
+    ).toEqual(false);
+  });
 });
