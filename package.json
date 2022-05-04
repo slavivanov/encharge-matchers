@@ -117,7 +117,6 @@
     "typescript": "^3.0.3"
   },
   "dependencies": {
-    "core-js": "^3.3.6",
     "lodash": "^4.17.15"
   }
 }

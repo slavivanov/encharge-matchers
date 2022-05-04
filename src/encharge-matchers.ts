@@ -1,6 +1,5 @@
 // Import here Polyfills if needed. Recommended core-js (npm i -D core-js)
-import "core-js";
-import * as _ from "lodash";
+import { get, each, isNil } from "lodash";
 
 export interface EventPropertyFilter {
   propertyName: string;
@@ -28,12 +27,12 @@ export const eventPassesFilters = ({
   filters: EventPropertyFilter[];
 }) => {
   let propertiesSatisfyFilters = true;
-  _.each(filters, filter => {
-    const property = _.get(event, filter.propertyName);
+  each(filters, filter => {
+    const property = get(event, filter.propertyName);
     switch (filter.condition) {
       case "is": {
         // null and undefined are considered not equal to anything
-        if (_.isNil(property)) {
+        if (isNil(property)) {
           propertiesSatisfyFilters = false;
         }
         // cast the filter value to the type of the segment property
@@ -45,7 +44,7 @@ export const eventPassesFilters = ({
 
       case "is not": {
         // null and undefined are considered not equal to anything
-        if (!_.isNil(property)) {
+        if (!isNil(property)) {
           // cast the filter value to the type of the segment property
           if (property === castTo(filter.propertyValue, typeof property)) {
             propertiesSatisfyFilters = false;
@@ -56,7 +55,7 @@ export const eventPassesFilters = ({
 
       case "contains": {
         // null and undefined are considered not equal to anything
-        if (_.isNil(property)) {
+        if (isNil(property)) {
           propertiesSatisfyFilters = false;
         }
         // cast both to string to make sure
@@ -68,7 +67,7 @@ export const eventPassesFilters = ({
 
       case "does not contain": {
         // null and undefined are considered not equal to anything
-        if (_.isNil(property)) {
+        if (isNil(property)) {
           propertiesSatisfyFilters = false;
         }
         // cast both to string to make sure
@@ -80,7 +79,7 @@ export const eventPassesFilters = ({
 
       case "starts with": {
         // null and undefined are considered not equal to anything
-        if (_.isNil(property)) {
+        if (isNil(property)) {
           propertiesSatisfyFilters = false;
         }
         // cast both to string to make sure
@@ -91,7 +90,7 @@ export const eventPassesFilters = ({
       }
       case "does not start with": {
         // null and undefined are considered not equal to anything
-        if (_.isNil(property)) {
+        if (isNil(property)) {
           propertiesSatisfyFilters = false;
         }
         // cast both to string to make sure
@@ -102,7 +101,7 @@ export const eventPassesFilters = ({
       }
       case "ends with": {
         // null and undefined are considered not equal to anything
-        if (_.isNil(property)) {
+        if (isNil(property)) {
           propertiesSatisfyFilters = false;
         }
         // cast both to string to make sure
@@ -113,7 +112,7 @@ export const eventPassesFilters = ({
       }
       case "does not end with": {
         // null and undefined are considered not equal to anything
-        if (_.isNil(property)) {
+        if (isNil(property)) {
           propertiesSatisfyFilters = false;
         }
         // cast both to string to make sure
@@ -125,7 +124,7 @@ export const eventPassesFilters = ({
 
       case "is more than": {
         // null and undefined are considered not equal to anything
-        if (_.isNil(property)) {
+        if (isNil(property)) {
           propertiesSatisfyFilters = false;
         }
         // cast both to string to make sure
@@ -137,7 +136,7 @@ export const eventPassesFilters = ({
 
       case "is less than": {
         // null and undefined are considered not equal to anything
-        if (_.isNil(property)) {
+        if (isNil(property)) {
           propertiesSatisfyFilters = false;
         }
         // cast both to string to make sure
@@ -149,14 +148,14 @@ export const eventPassesFilters = ({
 
       case "is empty": {
         // null and undefined are considered empty
-        if (property !== "" && !_.isNil(property)) {
+        if (property !== "" && !isNil(property)) {
           propertiesSatisfyFilters = false;
         }
         break;
       }
       case "is not empty": {
         // null and undefined are considered not equal to anything
-        if (property === "" || _.isNil(property)) {
+        if (property === "" || isNil(property)) {
           propertiesSatisfyFilters = false;
         }
         break;
