@@ -15,7 +15,9 @@ export interface EventPropertyFilter {
     | "is more than"
     | "is less than"
     | "is empty"
-    | "is not empty";
+    | "is not empty"
+    | "is one of"
+    | "is not one of";
   propertyValue: string;
 }
 
@@ -157,6 +159,40 @@ export const eventPassesFilters = ({
         // null and undefined are considered not equal to anything
         if (property === "" || isNil(property)) {
           propertiesSatisfyFilters = false;
+        }
+        break;
+      }
+      case "is one of": {
+        // check if the property is in the list of values (comma-separated)
+
+        // null and undefined are considered not equal to anything
+        if (isNil(property)) {
+          propertiesSatisfyFilters = false;
+        }
+
+        const values = String(filter.propertyValue)
+          .split(",")
+          .map(v => v.trim());
+        // cast the filter value to the type of the segment property
+        const found = values.find(value => property === castTo(value, typeof property));
+        if (!found) {
+          propertiesSatisfyFilters = false;
+        }
+        break;
+      }
+      case "is not one of": {
+        // check if the property is not in the list of values (comma-separated)
+
+        // null and undefined are considered not equal to anything
+        if (!isNil(property)) {
+          // cast the filter value to the type of the segment property
+          const values = String(filter.propertyValue)
+            .split(",")
+            .map(v => v.trim());
+          const found = values.find(value => property === castTo(value, typeof property));
+          if (found) {
+            propertiesSatisfyFilters = false;
+          }
         }
         break;
       }

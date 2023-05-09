@@ -806,4 +806,144 @@ describe("/event", () => {
       })
     ).toEqual(false);
   });
+  it("should work with 'is one of' comma separated values", async () => {
+    const event = {
+      prop1: "hm"
+    };
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "prop1",
+            condition: "is one of",
+            propertyValue: "hm,123"
+          }
+        ]
+      })
+    ).toEqual(true);
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "prop1",
+            condition: "is one of",
+            propertyValue: "123"
+          }
+        ]
+      })
+    ).toEqual(false);
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "prop1",
+            condition: "is one of",
+            propertyValue: ""
+          }
+        ]
+      })
+    ).toEqual(false);
+  });
+  it("should work with 'is one of' comma separated values with numbers", async () => {
+    const event = {
+      prop1: 123
+    };
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "prop1",
+            condition: "is one of",
+            propertyValue: "hm, 123"
+          }
+        ]
+      })
+    ).toEqual(true);
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "prop1",
+            condition: "is one of",
+            propertyValue: "hm"
+          }
+        ]
+      })
+    ).toEqual(false);
+  });
+  it("should work with 'is not one of' comma separated values", async () => {
+    const event = {
+      prop1: "hm"
+    };
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "prop1",
+            condition: "is not one of",
+            propertyValue: "hm,123"
+          }
+        ]
+      })
+    ).toEqual(false);
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "prop1",
+            condition: "is not one of",
+            propertyValue: "123"
+          }
+        ]
+      })
+    ).toEqual(true);
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "prop1",
+            condition: "is not one of",
+            propertyValue: ""
+          }
+        ]
+      })
+    ).toEqual(true);
+  });
+  it("should work with 'is not one of' comma separated values with numbers", async () => {
+    const event = {
+      prop1: 123
+    };
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "prop1",
+            condition: "is not one of",
+            propertyValue: "hm,123"
+          }
+        ]
+      })
+    ).toEqual(false);
+    expect(
+      eventPassesFilters({
+        event,
+        filters: [
+          {
+            propertyName: "prop1",
+            condition: "is not one of",
+            propertyValue: " hm, 12.3"
+          }
+        ]
+      })
+    ).toEqual(true);
+  });
 });
